@@ -1,0 +1,466 @@
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    margin: 0;
+    height: 100vh;
+    background-color: #F4F7FE;
+}
+
+.titulo-empleados {
+    color: #A3AED0;
+}
+
+.sidebar {
+    width: 200px;
+    min-width: 200px;
+    max-width: 200px;
+    background-color: #FFFFFF;
+    padding: 15px;
+    height: 100vh;
+    box-shadow: 2px 0px 5px rgba(0, 0, 0, 0.1);
+}
+
+.sidebar h2 {
+    text-align: center;
+    color: #2B3674;
+}
+
+.sidebar ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.sidebar ul li {
+    padding: 10px 0;
+}
+
+.sidebar ul li a {
+    color: #4318FF;
+    text-decoration: none;
+    display: block;
+    text-align: center;
+}
+
+.main-content {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+    width: calc(100% - 200px); /* Resta el ancho de la barra lateral */
+    box-sizing: border-box;
+}
+
+.main-content h1 {
+    margin-bottom: 20px;
+    font-size: 32px;
+    color: #333;
+}
+
+.stats {
+    display: flex;
+    justify-content: space-between;
+}
+
+.stat {
+    background-color: #FFFFFF;
+    padding: 20px;
+    border-radius: 5px;
+    text-align: center;
+    display: flex;
+    align-items: center; 
+    flex: 1; /* Se extiende para ocupar el espacio disponible */
+    margin-right: 20px; /* Espacio entre las tarjetas */
+}
+
+.stat:last-child {
+    margin-right: 0; /* Elimina el margen derecho de la última tarjeta */
+}
+
+.stat-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background-color: #f0f4ff;
+    border-radius: 50%;
+    margin-right: 15px;
+    color: #4318FF; /* Elige el color que quieras para los íconos */
+}
+
+.stat-icon svg {
+    width: 20px;
+    height: 20px;
+}
+
+.stat-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex: 1; /* Asegura que el contenido ocupe todo el espacio disponible */
+    text-align: center; /* Alinea el texto y la cantidad a la derecha */
+
+}
+
+.titulo-empleados {
+    margin: 0;
+}
+
+.charts {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.chart-container {
+    flex: 1; /* Cada gráfico se extiende para ocupar el espacio disponible */
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.chart-card {
+    width: 100%; /* El gráfico ocupa todo el ancho del contenedor */
+    height: 300px; /* Altura fija para el gráfico */
+}
+
+.card p {
+    font-size: 18px;
+    margin: 0;
+    color: #A3AED0;
+}
+
+.card h2 {
+    font-size: 36px;
+    margin: 10px 0 0 0;
+    font-weight: bold;
+    color: #2B3674;
+}
+
+.page-header {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+.breadcrumb {
+    font-size: 14px;
+    color: #707EAE;
+    margin: 0;
+}
+
+.page-header h1 {
+    font-size: 40px;
+    color: #2B3674;
+    margin: 0;
+    font-weight: bold;
+    margin-top: 5px;
+}
+
+.table-container {
+    background-color: #FFFFFF;
+    padding: 5px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.table-container h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #2B3674;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    text-align: left;
+    padding: 10px;
+    border-bottom: 1px solid #F4F7FE;
+    color: #2B3674;
+
+}
+
+th {
+    background-color: #FFFFFF;
+    color: #A3AED0;
+}
+
+tr:hover {
+    background-color: #F4F7FE;
+}
+
+select {
+    padding: 8px;
+    margin-bottom: 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+}
+
+select:focus {
+    border-color: #7B8AB8;
+    outline: none;
+    box-shadow: 0 0 5px rgba(123, 138, 184, 0.5);
+}
+
+.search-container {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 20px;
+}
+
+.search-container input[type="text"] {
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    width: 300px;
+}
+
+.search-container input[type="text"]:focus {
+    border-color: #7B8AB8;
+    outline: none;
+    box-shadow: 0 0 5px rgba(123, 138, 184, 0.5);
+}
+
+.search-container button {
+    padding: 10px 20px;
+    font-size: 16px;
+    margin-left: 10px;
+    background-color: #7B8AB8;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.search-container button:hover {
+    background-color: #5e6a9e;
+}
+
+/* Estilos para el Modal */
+.modal {
+    display: none; /* Asegúrate de que esto cambie a 'block' cuando el modal debe mostrarse */
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+    background-color: #ffffff;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 600px;
+    border-radius: 10px;
+}
+
+.factura-titulo {
+    text-align: right;
+    color: #2B3674;
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.factura-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.factura-compania h3 {
+    margin: 0;
+    color: #2B3674;
+}
+
+.factura-compania p, .factura-datos p {
+    margin: 5px 0;
+    color: #555;
+}
+
+.factura-info {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.factura-cliente, .factura-id {
+
+    justify-content: space-between;
+    width: 45%;
+}
+
+.factura-tabla {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.factura-tabla th, .factura-tabla td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+.factura-tabla th {
+    background-color: #2B3674;
+    color: white;
+}
+
+.text-right {
+    text-align: right;
+}
+
+.close {
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover, .close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Estilos para el sidebar activo */
+
+.sidebar ul li a {
+    color: #A3AED0; /* Color más claro para pestañas inactivas */
+    text-decoration: none;
+    display: block;
+    text-align: center;
+    padding: 10px 0;
+    position: relative;
+}
+
+.sidebar ul li a.active {
+    color: #4318FF; /* Morado más profundo para la pestaña activa */
+    font-weight: bold;
+}
+
+.sidebar ul li a.active::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background-color: #4318FF; /* Línea indicadora para la pestaña activa */
+    border-radius: 2px;
+}
+
+/* Estilos para el selector de categorías */
+.category-selector {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 15px;
+    background-color: #FFFFFF;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    font-family: Arial, sans-serif;
+}
+
+.category-selector h2 {
+    font-size: 18px;
+    color: #2B3674;
+    margin: 0;
+    display: flex;
+    align-items: center;
+}
+
+
+.category-selector select {
+    padding: 8px 12px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    color: #2B3674;
+    background-color: #F4F7FE;
+    box-shadow: 0 0 5px rgba(123, 138, 184, 0.5);
+}
+
+.category-selector select:focus {
+    outline: none;
+    border-color: #4318FF;
+    box-shadow: 0 0 10px rgba(67, 24, 255, 0.2);
+}
+
+/* Estilos para el botón de buscar */
+.search-container {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 20px;
+    padding: 10px;
+    position: relative;
+}
+
+.search-form {
+    display: flex;
+    align-items: center;
+    background-color: #FFFFFF;
+    border-radius: 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    padding: 5px 10px;
+    width: 350px;
+}
+
+.search-input {
+    flex: 1;
+    padding: 10px 15px;
+    font-size: 16px;
+    border: none;
+    border-radius: 20px;
+    background-color: #F4F7FE;
+    color: #2B3674;
+    outline: none;
+}
+
+.search-input::placeholder {
+    color: #A3AED0;
+    font-size: 14px;
+}
+
+.search-button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    margin-left: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #2B3674;
+}
+
+.search-button svg {
+    width: 20px;
+    height: 20px;
+}

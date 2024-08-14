@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Supermaxi Dashboard</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    </head>
+    
+<body>
+    <div class="sidebar">
+        <h2>Supermaxi</h2>
+        <ul>
+            <li><a href="{{ url_for('index') }}" class="{{ 'active' if request.endpoint == 'index' else '' }}">
+                <i class="fas fa-home"></i> Vista General
+            </a></li>
+            <li><a href="{{ url_for('empleados') }}" class="{{ 'active' if request.endpoint == 'empleados' else '' }}">
+                <i class="fas fa-user"></i> Sección de Empleados
+            </a></li>
+            <li><a href="{{ url_for('productos') }}" class="{{ 'active' if request.endpoint == 'productos' else '' }}">
+                <i class="fas fa-box"></i> Sección de Productos
+            </a></li>
+            <li><a href="{{ url_for('clientes') }}" class="{{ 'active' if request.endpoint == 'clientes' else '' }}">
+                <i class="fas fa-users"></i> Sección de Clientes
+            </a></li>
+            <li><a href="{{ url_for('facturacion') }}" class="{{ 'active' if request.endpoint == 'facturacion' else '' }}">
+                <i class="fas fa-file-invoice"></i> Sección de Facturación
+            </a></li>
+        </ul>
+    </div>
+    
+
+    <div class="main-content">
+        <div class="page-header">
+            <p class="breadcrumb">Página / Productos</p>
+            <h1>Productos</h1>
+        </div>
+        
+        <div class="category-selector">
+            <h2>Elija una categoría </h2>
+            <form method="GET" action="{{ url_for('productos') }}">
+                <select name="categoria" onchange="this.form.submit()">
+                    <option value="">Todas las Categorías</option>
+                    {% for categoria in categorias %}
+                        <option value="{{ categoria }}" {% if categoria == categoria_seleccionada %}selected{% endif %}>
+                            {{ categoria }}
+                        </option>
+                    {% endfor %}
+                </select>
+            </form>
+        </div>
+        
+        <div class="category-selector">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Código</th>
+                        <th>Nombre</th>
+                        <th>Descripción</th>
+                        <th>Precio</th>
+                        <th>Stock</th>
+                        <th>Fecha Ingreso</th>
+                        <th>Categoría</th>
+                        <th>Proveedor</th>
+                        <th>Estado</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for producto in productos %}
+                    <tr>
+                        <td>{{ producto.Codigo }}</td>
+                        <td>{{ producto.Nombre }}</td>
+                        <td>{{ producto.Descripcion }}</td>
+                        <td> $ {{ producto.Precio }}</td>
+                        <td>{{ producto.CantidadStock }}</td>
+                        <td>{{ producto.FechaIngreso }}</td>
+                        <td>{{ producto.Categoria }}</td>
+                        <td>{{ producto.Proveedor }}</td>
+                        <td>{{ producto.Estado }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

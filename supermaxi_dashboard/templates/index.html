@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Supermaxi Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="sidebar">
+        <h2>Supermaxi</h2>
+        <ul>
+            <li><a href="{{ url_for('index') }}" class="{{ 'active' if request.endpoint == 'index' else '' }}">
+                <i class="fas fa-home"></i> Vista General
+            </a></li>
+            <li><a href="{{ url_for('empleados') }}" class="{{ 'active' if request.endpoint == 'empleados' else '' }}">
+                <i class="fas fa-user"></i> Sección de Empleados
+            </a></li>
+            <li><a href="{{ url_for('productos') }}" class="{{ 'active' if request.endpoint == 'productos' else '' }}">
+                <i class="fas fa-box"></i> Sección de Productos
+            </a></li>
+            <li><a href="{{ url_for('clientes') }}" class="{{ 'active' if request.endpoint == 'clientes' else '' }}">
+                <i class="fas fa-users"></i> Sección de Clientes
+            </a></li>
+            <li><a href="{{ url_for('facturacion') }}" class="{{ 'active' if request.endpoint == 'facturacion' else '' }}">
+                <i class="fas fa-file-invoice"></i> Sección de Facturación
+            </a></li>
+        </ul>
+    </div>
+
+    <div class="main-content">
+        <div class="page-header">
+            <p class="breadcrumb">Página / Vista General</p>
+            <h1>Supermaxi</h1>
+        </div>
+
+        <div class="stats">
+            <div class="stat card">
+                <div class="stat-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-bar-chart-fill" viewBox="0 0 16 16">
+                        <path d="M11 1a1 1 0 0 1 1 1v11h3a1 1 0 0 1 0 2H1a1 1 0 0 1 0-2h3V5a1 1 0 0 1 1-1h3a1 1 0 0 1 1 1v7h3V2a1 1 0 0 1 1-1z"/>
+                    </svg>
+                </div>
+                <div class="stat-content">
+                    <p class="titulo-empleados">Total de Empleados</p>
+                    <h2>{{ total_empleados }}</h2>
+                </div>
+            </div>
+            <div class="stat card">
+                <div class="stat-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-people-fill" viewBox="0 0 16 16">
+                        <path d="M13 7a3 3 0 1 1-6 0 3 3 0 0 1 6 0zm1 8c0-1.5-2.5-2.5-4-2.5s-4 1-4 2.5V15h8v-1zM7.5 7a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0zM5 13c-1.5 0-4 1-4 2.5V15h8v-1c0-1.5-2.5-2.5-4-2.5z"/>
+                    </svg>
+                </div>
+                <div class="stat-content">
+                    <p>Total de Clientes</p>
+                    <h2>{{ total_clientes }}</h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="charts">
+            <div class="chart-container card chart-card">
+                <canvas id="productosChart"></canvas>
+            </div>
+            <div class="chart-container card chart-card">
+                <canvas id="ventasChart"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/charts.js') }}"></script>
+    <script>
+        const productosPorCategoria = {{ productos_por_categoria | tojson }};
+        const ventasPorMes = {{ ventas_por_mes | tojson }};
+        const totalVentasAnual = {{ total_ventas_anual }};
+        createCharts(productosPorCategoria, ventasPorMes, totalVentasAnual);
+    </script>
+</body>
+</html>

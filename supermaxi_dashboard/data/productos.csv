@@ -1,0 +1,5 @@
+Codigo;Nombre;Descripcion;Precio;Cantidad en Stock;Fecha de Ingreso;Categoria;Proveedor;Estado
+1;COLGATE;CR DENTAL COLGATE;2.63;390;11/08/2024;Higiene, salud y belleza;Colgate;Disponible
+2;ANISA;JAB VELO;4.07;390;11/08/2024;Higiene, salud y belleza;P&G;Entrantes
+3;JOLLY;JB SIXPACK S;1.95;400;11/08/2024;Higiene, salud y belleza;Dove;Disponible
+4;KIOSKO;YOG BEB FRU;1.1;200;11/08/2024;Aguas y bebidas;Nestle;Comprometido

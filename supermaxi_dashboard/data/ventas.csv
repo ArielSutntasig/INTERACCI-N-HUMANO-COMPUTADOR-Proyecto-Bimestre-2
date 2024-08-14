@@ -1,0 +1,3 @@
+IDFactura;Fecha;ID Cliente;Descripcion;Cantidad;Precio unit;Subtotal;Impuestos;Total;Metodo de Pago;Estado;Direccion
+1;11/8/2024;1234567891;[JABON-CEREAL-QUESO-GUANTES];[1-1-1-1];[2.21-1.21-4-0.75];22.73;3.41;26.14;Tarjeta;Pagado;AV. GALO PLAZA LASSO S/N Y AV. SIMON BOLIVAR
+2;11/8/2024;1234567892;[JABON-CEREAL-QUESO-GUANTES];[1-1-1-1];[2.21-1.21-4-0.75];22.73;3.41;26.14;Tarjeta;Pagado;AV. GALO PLAZA LASSO S/N Y AV. SIMON BOLIVAR

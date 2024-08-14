@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Supermaxi Dashboard</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    </head>    
+<body>
+    <div class="sidebar">
+        <h2>Supermaxi</h2>
+        <ul>
+            <li><a href="{{ url_for('index') }}" class="{{ 'active' if request.endpoint == 'index' else '' }}">
+                <i class="fas fa-home"></i> Vista General
+            </a></li>
+            <li><a href="{{ url_for('empleados') }}" class="{{ 'active' if request.endpoint == 'empleados' else '' }}">
+                <i class="fas fa-user"></i> Sección de Empleados
+            </a></li>
+            <li><a href="{{ url_for('productos') }}" class="{{ 'active' if request.endpoint == 'productos' else '' }}">
+                <i class="fas fa-box"></i> Sección de Productos
+            </a></li>
+            <li><a href="{{ url_for('clientes') }}" class="{{ 'active' if request.endpoint == 'clientes' else '' }}">
+                <i class="fas fa-users"></i> Sección de Clientes
+            </a></li>
+            <li><a href="{{ url_for('facturacion') }}" class="{{ 'active' if request.endpoint == 'facturacion' else '' }}">
+                <i class="fas fa-file-invoice"></i> Sección de Facturación
+            </a></li>
+        </ul>
+    </div>
+
+    <div class="main-content">
+        <div class="page-header">
+            <p class="breadcrumb">Pages / Facturas</p>
+            <h1 class="breadcrumb">Facturas</h1>
+        </div>
+
+        <div class="search-container">
+            <form method="POST" class="search-form">
+                <input type="text" name="cedula" placeholder="Ingrese la Cédula del cliente" class="search-input" />
+                <button type="submit" class="search-button">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                        <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001l3.85 3.85a1 1 0 0 0 1.415-1.415l-3.85-3.85zm-5.344-.344a5.5 5.5 0 1 1 0-11 5.5 5.5 0 0 1 0 11z"/>
+                    </svg>
+                </button>
+            </form>
+        </div>
+
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Fecha</th>
+                        <th>Cédula Cliente</th>
+                        <th>Subtotal</th>
+                        <th>Impuestos</th>
+                        <th>Total facturado</th>
+                        <th>Método de pago</th>
+                        <th>Estado</th>
+                        <th>Dirección</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for venta in ventas %}
+                    <tr class="factura-row" 
+                        data-id="{{ venta.IDFactura }}" 
+                        data-fecha="{{ venta.Fecha }}" 
+                        data-cliente="{{ venta.IdCliente }}" 
+                        data-subtotal="{{ venta.Subtotal }}" 
+                        data-impuestos="{{ venta.Impuestos }}" 
+                        data-total="{{ venta.Total }}" 
+                        data-metodo="{{ venta.MetodoPago }}" 
+                        data-estado="{{ venta.Estado }}" 
+                        data-direccion="{{ venta.Direccion }}"
+                        data-descripcion="{{ venta.Descripcion }}"
+                        data-cantidad="{{ venta.Cantidad }}"
+                        data-preciounit="{{ venta['Precio unit'] }}">
+                        <td>{{ venta.IDFactura }}</td>
+                        <td>{{ venta.Fecha }}</td>
+                        <td>{{ venta.IdCliente }}</td>
+                        <td>{{ venta.Subtotal }}</td>
+                        <td>{{ venta.Impuestos }}</td>
+                        <td>{{ venta.Total }}</td>
+                        <td>{{ venta.MetodoPago }}</td>
+                        <td>{{ venta.Estado }}</td>
+                        <td>{{ venta.Direccion }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div id="facturaModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2 class="factura-titulo">FACTURA</h2>
+
+            <div class="factura-header">
+                <div class="factura-compania">
+                    <h3>Supermaxi</h3>
+                    <p>Avenida de los Shyris y Avenida Naciones Unidas</p>
+                    <p>Quito, Pichincha, 170135</p>
+                    <p>Teléfono: (02) 298-5000</p>
+                </div>
+                <div class="factura-datos">
+                    <p><strong>FACTURA #</strong> <span id="factura-id"></span></p>
+                    <p><strong>FECHA</strong> <span id="factura-fecha"></span></p>
+                </div>
+            </div>
+
+            <div class="factura-info">
+                <div class="factura-cliente">
+                    <h4>FACTURAR A</h4>
+                    <p id="factura-cliente"></p>
+                    <p id="factura-direccion"></p>
+                </div>
+                <div class="factura-id">
+                    <h4>TÉRMINOS</h4>
+                    <p>Pago inmediato a la recepción de la factura</p>
+                </div>
+            </div>
+
+            <table class="factura-tabla">
+                <thead>
+                    <tr>
+                        <th>DESCRIPCIÓN</th>
+                        <th>CANT</th>
+                        <th>PRECIO UNITARIO</th>
+                        <th>MONTO</th>
+                    </tr>
+                </thead>
+                <tbody id="factura-items">
+                    <!-- Los items de la factura se llenarán dinámicamente -->
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="3" class="text-right">Subtotal</td>
+                        <td id="factura-subtotal"></td>
+                    </tr>
+                    <tr>
+                        <td colspan="3" class="text-right">Impuestos</td>
+                        <td id="factura-impuestos"></td>
+                    </tr>
+                    <tr>
+                        <td colspan="3" class="text-right">Total</td>
+                        <td id="factura-total"></td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/factura_modal.js') }}"></script>
+
+</body>
+</html>
